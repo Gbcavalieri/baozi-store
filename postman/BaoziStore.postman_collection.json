@@ -1,0 +1,130 @@
+{
+  "info": {
+    "name": "Baozi Store API",
+    "description": "Coleção para testar a API REST da Baozi Store. Antes de rodar, edite a variável da coleção 'nomeCliente' com seu Nome+RU (ex.: Luciane123456).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "nomeCliente", "value": "Gabriel5484519" },
+    { "key": "clienteId", "value": "1" },
+    { "key": "produtoId", "value": "1" },
+    { "key": "pedidoId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "POST - Criar cliente",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "if (pm.response.code === 201) pm.collectionVariables.set('clienteId', pm.response.json().id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"{{nomeCliente}}\",\n  \"clienteDesde\": \"2026-10-12\"\n}" },
+            "url": { "raw": "{{baseUrl}}/clientes", "host": ["{{baseUrl}}"], "path": ["clientes"] }
+          }
+        },
+        {
+          "name": "GET - Listar clientes",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/clientes", "host": ["{{baseUrl}}"], "path": ["clientes"] } }
+        },
+        {
+          "name": "GET - Cliente por ID",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/clientes/{{clienteId}}", "host": ["{{baseUrl}}"], "path": ["clientes", "{{clienteId}}"] } }
+        },
+        {
+          "name": "PUT - Atualizar cliente",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"{{nomeCliente}}\",\n  \"clienteDesde\": \"2026-10-01\"\n}" },
+            "url": { "raw": "{{baseUrl}}/clientes/{{clienteId}}", "host": ["{{baseUrl}}"], "path": ["clientes", "{{clienteId}}"] }
+          }
+        },
+        {
+          "name": "DELETE - Apagar cliente",
+          "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/clientes/{{clienteId}}", "host": ["{{baseUrl}}"], "path": ["clientes", "{{clienteId}}"] } }
+        }
+      ]
+    },
+    {
+      "name": "Produtos",
+      "item": [
+        {
+          "name": "POST - Criar produto",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "if (pm.response.code === 201) pm.collectionVariables.set('produtoId', pm.response.json().id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Baozi de Porco\",\n  \"preco\": 8.50,\n  \"estoque\": true\n}" },
+            "url": { "raw": "{{baseUrl}}/produtos", "host": ["{{baseUrl}}"], "path": ["produtos"] }
+          }
+        },
+        {
+          "name": "GET - Listar produtos",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/produtos", "host": ["{{baseUrl}}"], "path": ["produtos"] } }
+        },
+        {
+          "name": "GET - Produto por ID",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/produtos/{{produtoId}}", "host": ["{{baseUrl}}"], "path": ["produtos", "{{produtoId}}"] } }
+        },
+        {
+          "name": "PUT - Atualizar produto",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"nome\": \"Baozi de Porco\",\n  \"preco\": 9.00,\n  \"estoque\": true\n}" },
+            "url": { "raw": "{{baseUrl}}/produtos/{{produtoId}}", "host": ["{{baseUrl}}"], "path": ["produtos", "{{produtoId}}"] }
+          }
+        },
+        {
+          "name": "DELETE - Apagar produto",
+          "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/produtos/{{produtoId}}", "host": ["{{baseUrl}}"], "path": ["produtos", "{{produtoId}}"] } }
+        }
+      ]
+    },
+    {
+      "name": "Pedidos",
+      "item": [
+        {
+          "name": "POST - Criar pedido",
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "if (pm.response.code === 201) pm.collectionVariables.set('pedidoId', pm.response.json().id);"
+          ] } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"clienteId\": {{clienteId}},\n  \"produtoId\": {{produtoId}},\n  \"quantidade\": 6\n}" },
+            "url": { "raw": "{{baseUrl}}/pedidos", "host": ["{{baseUrl}}"], "path": ["pedidos"] }
+          }
+        },
+        {
+          "name": "GET - Listar pedidos",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/pedidos", "host": ["{{baseUrl}}"], "path": ["pedidos"] } }
+        },
+        {
+          "name": "GET - Pedido por ID",
+          "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/pedidos/{{pedidoId}}", "host": ["{{baseUrl}}"], "path": ["pedidos", "{{pedidoId}}"] } }
+        },
+        {
+          "name": "PUT - Atualizar pedido",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"clienteId\": {{clienteId}},\n  \"produtoId\": {{produtoId}},\n  \"quantidade\": 10\n}" },
+            "url": { "raw": "{{baseUrl}}/pedidos/{{pedidoId}}", "host": ["{{baseUrl}}"], "path": ["pedidos", "{{pedidoId}}"] }
+          }
+        },
+        {
+          "name": "DELETE - Apagar pedido",
+          "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/pedidos/{{pedidoId}}", "host": ["{{baseUrl}}"], "path": ["pedidos", "{{pedidoId}}"] } }
+        }
+      ]
+    }
+  ]
+}

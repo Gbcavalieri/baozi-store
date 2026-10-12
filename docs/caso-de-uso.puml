@@ -1,0 +1,55 @@
+@startuml caso-de-uso
+!pragma layout smetana
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle default
+skinparam usecase {
+  BackgroundColor #FFF8E7
+  BorderColor #8B4513
+}
+
+actor "Usuário da API" as U
+
+rectangle "API REST - Baozi Store" {
+  package "Cliente" {
+    usecase "Cadastrar cliente\n(POST /clientes)" as C1
+    usecase "Listar clientes\n(GET /clientes)" as C2
+    usecase "Consultar cliente por ID\n(GET /clientes/{id})" as C3
+    usecase "Atualizar cliente\n(PUT /clientes/{id})" as C4
+    usecase "Apagar cliente\n(DELETE /clientes/{id})" as C5
+  }
+  package "Produto" {
+    usecase "Cadastrar produto\n(POST /produtos)" as P1
+    usecase "Listar produtos\n(GET /produtos)" as P2
+    usecase "Consultar produto por ID\n(GET /produtos/{id})" as P3
+    usecase "Atualizar produto\n(PUT /produtos/{id})" as P4
+    usecase "Apagar produto\n(DELETE /produtos/{id})" as P5
+  }
+  package "Pedido" {
+    usecase "Registrar pedido\n(POST /pedidos)" as O1
+    usecase "Listar pedidos\n(GET /pedidos)" as O2
+    usecase "Consultar pedido por ID\n(GET /pedidos/{id})" as O3
+    usecase "Atualizar pedido\n(PUT /pedidos/{id})" as O4
+    usecase "Apagar pedido\n(DELETE /pedidos/{id})" as O5
+    usecase "Validar cliente e\nproduto existentes" as V
+  }
+}
+
+U --> C1
+U --> C2
+U --> C3
+U --> C4
+U --> C5
+U --> P1
+U --> P2
+U --> P3
+U --> P4
+U --> P5
+U --> O1
+U --> O2
+U --> O3
+U --> O4
+U --> O5
+O1 ..> V : <<include>>
+O4 ..> V : <<include>>
+@enduml
